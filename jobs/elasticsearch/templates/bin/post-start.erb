@@ -5,6 +5,10 @@ set -e
 out=$(mktemp health-XXXXXX)
 remaining=<%= p("elasticsearch.health.timeout") %>
 
+if [ "<%= spec.ip %>" == "<%= p('elasticsearch.master_hosts').first %>" ]; then
+  sleep 15
+fi
+
 # Ensure shard allocation is enabled for updates from previous release
 # TODO: Deprecate on next release
 curl -X PUT -s <%= p('elasticsearch.master_hosts').first %>:9200/_cluster/settings \
