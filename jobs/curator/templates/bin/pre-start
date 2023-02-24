@@ -2,6 +2,21 @@
 
 set -eu
 
+# Wait for os-config script to complete
+sleep 15
+
+while true; do
+  if ! ps aux | grep os-config/bin/pre-start | grep -q -v grep; then
+    break
+  fi
+
+  echo "Waiting for os-config to complete..."
+  sleep 15
+done
+
+apt-get install -y python3-pip
+pip install --no-index --find-links /var/vcap/packages/curator/vendor/ /var/vcap/packages/curator/elasticsearch_curator-7.0.0-py3-none-any.whl
+
 <% if p('curator.execute.hourly') %>
 # Execute Curator hourly
 cp /var/vcap/jobs/curator/bin/run-curator /etc/cron.hourly

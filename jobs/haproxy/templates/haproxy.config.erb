@@ -83,7 +83,7 @@ frontend syslog-in
     mode tcp
 
     <% if properties.haproxy.ssl_pem and properties.haproxy.ingestor.enable_ssl == true %>
-    bind :<%= p("haproxy.ingestor.syslog.inbound_port") %> ssl crt /var/vcap/jobs/haproxy/config/cert.pem no-sslv3
+    bind :<%= p("haproxy.ingestor.syslog.inbound_port") %> ssl crt /var/vcap/jobs/haproxy/config/cert.pem no-sslv3 no-tlsv10 no-tlsv11
     <% else %>
     bind :<%= p("haproxy.ingestor.syslog.inbound_port") %>
     <% end %>
@@ -101,7 +101,7 @@ backend ingestors-syslog
 frontend syslog-tls-in
     mode tcp
     <% if properties.haproxy.ssl_pem and properties.haproxy.ingestor.enable_ssl == true %>
-    bind :<%= p("haproxy.ingestor.tls.inbound_port") %> ssl crt /var/vcap/jobs/haproxy/config/cert.pem no-sslv3
+    bind :<%= p("haproxy.ingestor.tls.inbound_port") %> ssl crt /var/vcap/jobs/haproxy/config/cert.pem no-sslv3 no-tlsv10 no-tlsv11
     <% else %>
     bind :<%= p("haproxy.ingestor.tls.inbound_port") %>
     <% end %>
@@ -119,7 +119,7 @@ frontend relp-in
     mode tcp
 
     <% if properties.haproxy.ssl_pem and properties.haproxy.ingestor.enable_ssl == true %>
-    bind :<%= p("haproxy.ingestor.relp.inbound_port") %> ssl crt /var/vcap/jobs/haproxy/config/cert.pem no-sslv3
+    bind :<%= p("haproxy.ingestor.relp.inbound_port") %> ssl crt /var/vcap/jobs/haproxy/config/cert.pem no-sslv3 no-tlsv10 no-tlsv11
     <% else %>
     bind :<%= p("haproxy.ingestor.relp.inbound_port") %>
     <% end %>
@@ -139,7 +139,7 @@ frontend kibana-in
 
     bind :<%= p("haproxy.kibana.inbound_port.http") %>
     <% if properties.haproxy.ssl_pem and properties.haproxy.kibana.enable_ssl == true %>
-    bind :<%= p("haproxy.kibana.inbound_port.https") %> ssl crt /var/vcap/jobs/haproxy/config/cert.pem no-sslv3
+    bind :<%= p("haproxy.kibana.inbound_port.https") %> ssl crt /var/vcap/jobs/haproxy/config/cert.pem no-sslv3 no-tlsv10 no-tlsv11
     <% end %>
 
     <% if p('haproxy.kibana.auth.username') != "" %>
@@ -161,7 +161,7 @@ frontend cluster_monitor-in
     option httplog
 
     <% if properties.haproxy.ssl_pem %>
-    bind :<%= p("haproxy.cluster_monitor.inbound_port") %> ssl crt /var/vcap/jobs/haproxy/config/cert.pem no-sslv3
+    bind :<%= p("haproxy.cluster_monitor.inbound_port") %> ssl crt /var/vcap/jobs/haproxy/config/cert.pem no-sslv3 no-tlsv10 no-tlsv11
     <% else %>
     bind :<%= p("haproxy.cluster_monitor.inbound_port") %>
     <% end %>
@@ -203,7 +203,7 @@ frontend elastic-in
     mode http
 
     <% if properties.haproxy.ssl_pem and properties.haproxy.elastic.enable_ssl == true %>
-    bind :<%= p("haproxy.elastic.inbound_port") %> ssl crt /var/vcap/jobs/haproxy/config/cert.pem no-sslv3
+    bind :<%= p("haproxy.elastic.inbound_port") %> ssl crt /var/vcap/jobs/haproxy/config/cert.pem no-sslv3 no-tlsv10 no-tlsv11
     <% else %>
     bind :<%= p("haproxy.elastic.inbound_port") %>
     <% end %>
@@ -220,7 +220,7 @@ backend elastic
     mode http
     balance roundrobin
     <% elasticsearch_hosts.each_with_index do |ip, index| %>
-    server elastic<%= index %> <%= ip %>:9200 check inter 1000
+    server elastic<%= index %> <%= ip %>:9000 check inter 1000
     <% end %>
 
 

@@ -22,7 +22,7 @@ do
   fi
 done
 
-export JAVA_HOME=/var/vcap/packages/elasticsearch/jdk
+export JAVA_HOME=/var/vcap/packages/openjdk-11/jre
 
 /var/vcap/packages/cerebro/bin/cerebro \
  <%= p("cerebro.exec.options", []).join(' ') %> \

@@ -25,3 +25,8 @@ version
 /logsearch-config
 /logsearch-config.tgz
 deployment/ci/logsearch-vars.yml
+
+src/elasticsearch/*
+src/logstash/*
+src/openjdk-11/*
+src/kibana/*

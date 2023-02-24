@@ -65,7 +65,7 @@ then
   export PYTHONPATH=$WEBAPP_DIR/vendor/lib/python
 fi
 
-source /var/vcap/packages/openjdk-11/bosh/runtime.env
+export JAVA_HOME=/var/vcap/packages/openjdk-11/jre
 
 PIDFILE=$RUN_DIR/$JOB_NAME.pid
 

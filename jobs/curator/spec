@@ -5,7 +5,6 @@ description: This job runs Curator process to purge outdated info from Elasticse
 
 packages:
   - curator
-  - python3
 
 templates:
   bin/pre-start: bin/pre-start
