@@ -1,6 +1,6 @@
 set -e
 
-tar xzvf openjdk-11/OpenJDK11U-jdk_x64_linux_hotspot_11.0.17_8.tar.gz
+tar xzvf openjdk-11/OpenJDK11U-jdk_x64_linux_hotspot_11.0.20.1_1.tar.gz
 
 mkdir ${BOSH_INSTALL_TARGET}/jre
-cp -a jdk-11.0.17+8/* ${BOSH_INSTALL_TARGET}/jre
+cp -a jdk-11.0.20.1+1/* ${BOSH_INSTALL_TARGET}/jre
